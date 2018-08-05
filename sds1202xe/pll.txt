@@ -1,0 +1,63 @@
+Stock firmware performs these SPI writes on bootup (MSB first):
+
+0007D1
+403120
+04E142
+
+In binary that is:
+
+000000000000011111010001
+010000000011000100100000
+000001001110000101000010
+
+Decoding this:
+
+Control latch
+-------------
+
+403120
+ aa a a aaa abb bb b b b b ccc c cc cc
+ 01 0 0 000 000 11 0 0 0 1 001 0 00 00
+
+Prescaler: 01
+Powerdown 0/1: 0/0
+Current 2: 000
+Current 1: 000
+Output power: 11
+Mult-till-ld: 0
+CP gain: 0
+CP threestate: 0
+Phase detector polarity: 0
+Muxout: 0001
+Counter reset: 0
+Core power: 00
+
+N Counter latch
+---------------
+
+04E142
+ a a a aaaaabbbbbbbb c ccccc cc
+ 0 0 0 0010011100001 0 10000 10
+
+Divide by 2 select: 0
+Divide by 2: 0
+CP gain: 0
+B counter: 1249
+Reserved: 0
+A counter: 16
+
+
+R Counter latch
+---------------
+
+0007D1
+0 0 00 0 0 00 00000111110100 01
+
+Reserved: 0/0
+Band select clock: 00
+Test mode bit: 0
+Lock detect prcision: 0
+Anti backlash pulse width: 00
+R counter: 500
+
+

@@ -1,0 +1,198 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#
+# Connector_Specialized:Conn_Coaxial
+#
+DEF Connector_Specialized:Conn_Coaxial J 0 40 Y N 1 F N
+F0 "J" 10 120 50 H V C CNN
+F1 "Connector_Specialized:Conn_Coaxial" 115 0 50 V V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ *BNC*
+ *SMA*
+ *SMB*
+ *SMC*
+ *Cinch*
+$ENDFPLIST
+DRAW
+A -2 0 71 1636 0 0 1 10 N -70 20 70 0
+A -1 0 71 0 -1638 0 1 10 N 70 0 -70 -20
+C 0 0 20 0 1 8 N
+P 2 0 1 0 -50 0 -20 0 N
+P 2 0 1 0 0 -100 0 -70 N
+X In 1 -150 0 100 R 50 50 1 1 P
+X Ext 2 0 -200 100 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# blocks:ADC
+#
+DEF ~blocks:ADC U 0 40 Y Y 1 F N
+F0 "U" -50 250 50 H I C CNN
+F1 "blocks:ADC" -50 250 50 H I C CNN
+F2 "" -50 250 50 H I C CNN
+F3 "" -50 250 50 H I C CNN
+DRAW
+T 0 0 0 100 0 0 0 ADC Normal 0 C C
+T 0 0 -200 50 0 0 0 HAD1511 Normal 0 C C
+S -450 400 450 -400 0 0 0 f
+X CH_1 ~ -550 300 100 R 50 50 1 1 I
+X CH_2 ~ -550 100 100 R 50 50 1 1 I
+X CH_3 ~ -550 -100 100 R 50 50 1 1 I
+X CH_4 ~ -550 -300 100 R 50 50 1 1 I
+X LVDS ~ 550 -300 100 L 50 50 1 1 I
+X SPI ~ 550 250 100 L 50 50 1 1 I
+ENDDRAW
+ENDDEF
+#
+# blocks:ADCDriver
+#
+DEF ~blocks:ADCDriver U 0 40 Y Y 1 F N
+F0 "U" 0 250 50 H I C CNN
+F1 "blocks:ADCDriver" 0 250 50 H I C CNN
+F2 "" 0 250 50 H I C CNN
+F3 "" 0 250 50 H I C CNN
+DRAW
+T 0 0 -200 100 0 0 0 AD4932 Normal 0 C C
+T 0 0 200 100 0 0 0 ADC Normal 0 C C
+T 0 0 50 100 0 0 0 Driver Normal 0 C C
+S -400 300 400 -300 0 0 0 f
+X In ~ -500 0 100 R 50 50 1 1 I
+X Out ~ 500 0 100 L 50 50 1 1 I
+ENDDRAW
+ENDDEF
+#
+# blocks:DAC
+#
+DEF ~blocks:DAC U 0 40 Y Y 1 F N
+F0 "U" 0 550 50 H I C CNN
+F1 "blocks:DAC" 0 550 50 H I C CNN
+F2 "" 0 550 50 H I C CNN
+F3 "" 0 550 50 H I C CNN
+DRAW
+T 0 50 -100 50 0 0 0 AD5660CRMZ Normal 0 C C
+T 0 0 0 100 0 0 0 DAC Normal 0 C C
+P 6 0 0 0 300 200 300 -200 -100 -200 -350 0 -100 200 300 200 f
+X IN ~ 400 0 100 L 50 50 1 1 I
+X Out ~ -450 0 100 R 50 50 1 1 I
+ENDDRAW
+ENDDEF
+#
+# blocks:DDR3
+#
+DEF ~blocks:DDR3 U 0 40 Y Y 1 F N
+F0 "U" 0 200 50 H I C CNN
+F1 "blocks:DDR3" 0 200 50 H I C CNN
+F2 "" 0 200 50 H I C CNN
+F3 "" 0 200 50 H I C CNN
+DRAW
+T 0 0 0 100 0 0 0 DDR3 Normal 0 C C
+S -350 150 350 -150 0 0 0 f
+ENDDRAW
+ENDDEF
+#
+# blocks:Display
+#
+DEF ~blocks:Display U 0 40 Y Y 1 F N
+F0 "U" -50 500 50 H I C CNN
+F1 "blocks:Display" -50 500 50 H I C CNN
+F2 "" -50 500 50 H I C CNN
+F3 "" -50 500 50 H I C CNN
+DRAW
+T 0 0 200 100 0 0 0 Frontpanel Normal 0 C C
+S -500 300 500 -300 0 0 0 f
+X Display J12 -350 -400 100 U 50 50 1 1 I
+X LEDs J6a 0 -400 100 U 50 50 1 1 I
+X Buttons J6b 400 -400 100 U 50 50 1 1 I
+ENDDRAW
+ENDDEF
+#
+# blocks:Frontend
+#
+DEF ~blocks:Frontend U 0 40 Y Y 1 F N
+F0 "U" -150 400 50 H I C CNN
+F1 "blocks:Frontend" -150 400 50 H I C CNN
+F2 "" -150 400 50 H I C CNN
+F3 "" -150 400 50 H I C CNN
+DRAW
+T 0 0 0 100 0 0 0 Frontend Normal 0 C C
+S -550 200 550 -200 0 0 0 f
+X In ~ -650 0 100 R 50 50 1 1 I
+X Out ~ 650 0 100 L 50 50 1 1 I
+X SPI_Shiftregs ~ 650 150 100 L 50 50 1 1 I
+ENDDRAW
+ENDDEF
+#
+# blocks:Multiplexer
+#
+DEF ~blocks:Multiplexer U 0 40 Y Y 1 F N
+F0 "U" 50 1000 50 H I C CNN
+F1 "blocks:Multiplexer" 50 1000 50 H I C CNN
+F2 "" 50 1000 50 H I C CNN
+F3 "" 50 1000 50 H I C CNN
+DRAW
+T 0 0 750 100 0 0 0 Analog~Switch Normal 0 C C
+T 0 0 600 100 0 0 0 and~Sample~&~Hold Normal 0 C C
+S -350 450 350 -450 0 0 0 f
+X Input ~ 450 0 100 L 50 50 1 1 I
+X Out_1 ~ -450 350 100 R 50 50 1 1 I
+X Out_2 ~ -450 250 100 R 50 50 1 1 I
+X Out_3 ~ -450 150 100 R 50 50 1 1 I
+X Out_4 ~ -450 50 100 R 50 50 1 1 I
+X Out_5 ~ -450 -50 100 R 50 50 1 1 I
+X Out_6 ~ -450 -150 100 R 50 50 1 1 I
+X Out_7 ~ -450 -250 100 R 50 50 1 1 I
+X Out_8 ~ -450 -350 100 R 50 50 1 1 I
+X Select ~ 0 -550 100 U 50 50 1 1 I
+ENDDRAW
+ENDDEF
+#
+# blocks:USB_PHY
+#
+DEF ~blocks:USB_PHY U 0 40 Y Y 1 F N
+F0 "U" 0 200 50 H I C CNN
+F1 "blocks:USB_PHY" 0 200 50 H I C CNN
+F2 "" 0 200 50 H I C CNN
+F3 "" 0 200 50 H I C CNN
+DRAW
+T 0 0 0 100 0 0 0 USB~Phy Normal 0 C C
+S -400 100 400 -100 0 0 0 f
+ENDDRAW
+ENDDEF
+#
+# blocks:VGA
+#
+DEF ~blocks:VGA U 0 40 Y Y 1 F N
+F0 "U" 200 250 50 H I C CNN
+F1 "blocks:VGA" 0 250 50 H I C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+T 0 0 -150 100 0 0 0 AD8370 Normal 0 C C
+T 0 0 150 100 0 0 0 VGA Normal 0 C C
+S -350 250 350 -250 0 0 0 f
+X In ~ -450 0 100 R 50 50 1 1 I
+X Offset ~ 450 200 100 L 50 50 1 1 I
+X Out ~ 450 0 100 L 50 50 1 1 I
+X SPI ~ 450 100 100 L 50 50 1 1 I
+ENDDRAW
+ENDDEF
+#
+# blocks:Zynq
+#
+DEF ~blocks:Zynq U 0 40 Y Y 1 F N
+F0 "U" 550 650 50 H I C CNN
+F1 "blocks:Zynq" -500 650 50 H I C CNN
+F2 "" 0 700 50 H I C CNN
+F3 "" 0 700 50 H I C CNN
+DRAW
+T 0 -300 550 50 0 0 0 PL Normal 0 C C
+T 0 300 550 50 0 0 0 PS Normal 0 C C
+T 0 0 0 200 0 0 0 Zynq Normal 0 C C
+P 2 0 1 0 0 600 0 -600 N
+S -600 600 600 -600 1 1 0 f
+ENDDRAW
+ENDDEF
+#
+#End Library

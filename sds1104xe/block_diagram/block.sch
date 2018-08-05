@@ -1,0 +1,353 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:block-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L blocks:Zynq U?
+U 1 1 5A902B95
+P 9000 3750
+F 0 "U?" H 9550 4400 50  0001 C CNN
+F 1 "Zynq" H 8500 4400 50  0001 C CNN
+F 2 "" H 9000 4450 50  0001 C CNN
+F 3 "" H 9000 4450 50  0001 C CNN
+	1    9000 3750
+	1    0    0    -1  
+$EndComp
+$Comp
+L blocks:DDR3 U?
+U 1 1 5A902CA7
+P 10450 3300
+F 0 "U?" H 10450 3500 50  0001 C CNN
+F 1 "DDR3" H 10450 3500 50  0001 C CNN
+F 2 "" H 10450 3500 50  0001 C CNN
+F 3 "" H 10450 3500 50  0001 C CNN
+	1    10450 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L blocks:USB_PHY U?
+U 1 1 5A902D64
+P 10500 3600
+F 0 "U?" H 10500 3800 50  0001 C CNN
+F 1 "USB_PHY" H 10500 3800 50  0001 C CNN
+F 2 "" H 10500 3800 50  0001 C CNN
+F 3 "" H 10500 3800 50  0001 C CNN
+	1    10500 3600
+	1    0    0    -1  
+$EndComp
+$Comp
+L blocks:USB_PHY U?
+U 1 1 5A902D76
+P 10500 3850
+F 0 "U?" H 10500 4050 50  0001 C CNN
+F 1 "USB_PHY" H 10500 4050 50  0001 C CNN
+F 2 "" H 10500 4050 50  0001 C CNN
+F 3 "" H 10500 4050 50  0001 C CNN
+	1    10500 3850
+	1    0    0    -1  
+$EndComp
+Wire Bus Line
+	10100 3300 9600 3300
+Wire Bus Line
+	10100 3600 9600 3600
+Wire Bus Line
+	10100 3850 9600 3850
+$Comp
+L blocks:ADC U10
+U 1 1 5A9030B2
+P 6750 3400
+F 0 "U10" H 6700 3650 50  0000 C CNN
+F 1 "ADC" H 6700 3650 50  0001 C CNN
+F 2 "" H 6700 3650 50  0001 C CNN
+F 3 "" H 6700 3650 50  0001 C CNN
+	1    6750 3400
+	1    0    0    -1  
+$EndComp
+$Comp
+L blocks:ADC U11
+U 1 1 5A9030C4
+P 6750 4300
+F 0 "U11" H 6700 4550 50  0000 C CNN
+F 1 "ADC" H 6700 4550 50  0001 C CNN
+F 2 "" H 6700 4550 50  0001 C CNN
+F 3 "" H 6700 4550 50  0001 C CNN
+	1    6750 4300
+	1    0    0    -1  
+$EndComp
+$Comp
+L blocks:Display U?
+U 1 1 5A90325C
+P 8950 1250
+F 0 "U?" H 8900 1750 50  0001 C CNN
+F 1 "Display" H 8900 1750 50  0001 C CNN
+F 2 "" H 8900 1750 50  0001 C CNN
+F 3 "" H 8900 1750 50  0001 C CNN
+	1    8950 1250
+	1    0    0    -1  
+$EndComp
+Wire Bus Line
+	9350 1650 9350 1850
+Wire Bus Line
+	9350 1850 8800 1850
+Wire Bus Line
+	8800 1850 8800 3150
+Wire Bus Line
+	8950 1650 8950 1800
+Wire Bus Line
+	8950 1800 8750 1800
+Wire Bus Line
+	8750 1800 8750 3150
+Wire Bus Line
+	8600 1650 8600 1800
+Wire Bus Line
+	8600 1800 8700 1800
+Wire Bus Line
+	8700 1800 8700 3150
+$Comp
+L blocks:DDR3 U?
+U 1 1 5A903445
+P 8700 5000
+F 0 "U?" H 8700 5200 50  0001 C CNN
+F 1 "DDR3" H 8700 5200 50  0001 C CNN
+F 2 "" H 8700 5200 50  0001 C CNN
+F 3 "" H 8700 5200 50  0001 C CNN
+	1    8700 5000
+	1    0    0    -1  
+$EndComp
+Wire Bus Line
+	9600 4100 11150 4100
+Wire Bus Line
+	9600 4200 11150 4200
+Text Label 11150 4100 2    50   ~ 0
+UART
+Text Label 11150 4200 2    50   ~ 0
+PMIC_I2C
+Wire Bus Line
+	8700 4350 8700 4850
+Wire Bus Line
+	7300 4600 7700 4600
+Wire Bus Line
+	7700 4600 7700 4250
+Wire Bus Line
+	7700 4250 8400 4250
+Wire Bus Line
+	7300 3700 7700 3700
+Wire Bus Line
+	7700 3700 7700 4150
+Wire Bus Line
+	7700 4150 8400 4150
+Wire Bus Line
+	7400 4050 7300 4050
+Wire Bus Line
+	7400 2750 7400 4050
+Wire Bus Line
+	7400 3150 7300 3150
+Connection ~ 7400 3150
+Wire Bus Line
+	8450 2750 8450 3150
+Wire Bus Line
+	2500 2750 8450 2750
+$Comp
+L blocks:DAC U1
+U 1 1 5A904CBD
+P 7000 1800
+F 0 "U1" H 7050 1950 50  0000 C CNN
+F 1 "DAC" H 7000 2350 50  0001 C CNN
+F 2 "" H 7000 2350 50  0001 C CNN
+F 3 "" H 7000 2350 50  0001 C CNN
+	1    7000 1800
+	1    0    0    -1  
+$EndComp
+Wire Bus Line
+	8500 3150 8500 2450
+$Comp
+L blocks:Multiplexer U?
+U 1 1 5A9051C7
+P 5850 1800
+F 0 "U?" H 5900 2800 50  0001 C CNN
+F 1 "Multiplexer" H 5900 2800 50  0001 C CNN
+F 2 "" H 5900 2800 50  0001 C CNN
+F 3 "" H 5900 2800 50  0001 C CNN
+	1    5850 1800
+	1    0    0    -1  
+$EndComp
+Wire Bus Line
+	5850 2450 5850 2350
+Wire Bus Line
+	8500 2450 5850 2450
+Wire Bus Line
+	7400 1800 7550 1800
+Wire Bus Line
+	7550 1800 7550 2350
+Wire Bus Line
+	7550 2350 8550 2350
+Wire Bus Line
+	8550 2350 8550 3150
+Wire Bus Line
+	6550 1800 6300 1800
+$Comp
+L blocks:ADCDriver U?
+U 1 1 5A906C50
+P 4350 3100
+F 0 "U?" H 4350 3350 50  0001 C CNN
+F 1 "ADCDriver" H 4350 3350 50  0001 C CNN
+F 2 "" H 4350 3350 50  0001 C CNN
+F 3 "" H 4350 3350 50  0001 C CNN
+	1    4350 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L blocks:VGA Ux4
+U 1 1 5A906DA6
+P 3150 3100
+F 0 "Ux4" H 3150 3100 50  0000 C CNN
+F 1 "VGA" H 3150 3350 50  0001 C CNN
+F 2 "" H 3150 3100 50  0001 C CNN
+F 3 "" H 3150 3100 50  0001 C CNN
+	1    3150 3100
+	1    0    0    -1  
+$EndComp
+Wire Bus Line
+	3850 3100 3600 3100
+Wire Bus Line
+	3700 2900 3600 2900
+Wire Bus Line
+	3600 3000 3800 3000
+Wire Bus Line
+	3800 3000 3800 2750
+$Comp
+L blocks:Frontend U?
+U 1 1 5A90690A
+P 1850 3100
+F 0 "U?" H 1700 3500 50  0001 C CNN
+F 1 "Frontend" H 1700 3500 50  0001 C CNN
+F 2 "" H 1700 3500 50  0001 C CNN
+F 3 "" H 1700 3500 50  0001 C CNN
+	1    1850 3100
+	1    0    0    -1  
+$EndComp
+Wire Bus Line
+	4850 3100 6200 3100
+Connection ~ 7400 2750
+Wire Bus Line
+	2500 3100 2700 3100
+Wire Bus Line
+	2500 2950 2500 2750
+Connection ~ 3800 2750
+Text Label 5300 2750 0    50   ~ 0
+SPI
+Text Label 5300 3100 0    50   ~ 0
+Waveform
+Text Label 4000 1800 0    50   ~ 0
+OffsetVoltage
+$Comp
+L Connector_Specialized:Conn_Coaxial J?
+U 1 1 5A909F7F
+P 950 3100
+F 0 "J?" H 1050 2984 50  0000 L CNN
+F 1 "IN" H 1050 3075 50  0000 L CNN
+F 2 "" H 950 3100 50  0001 C CNN
+F 3 "" H 950 3100 50  0001 C CNN
+	1    950  3100
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	1100 3100 1200 3100
+Wire Notes Line
+	650  2550 650  3700
+Wire Notes Line
+	650  3700 5000 3700
+Wire Notes Line
+	5000 3700 5000 2550
+Wire Notes Line
+	5000 2550 650  2550
+Wire Notes Line
+	5050 3750 5050 2600
+Wire Notes Line
+	5050 2600 5000 2600
+Wire Notes Line
+	700  3750 5050 3750
+Wire Notes Line
+	700  3750 700  3700
+Wire Notes Line
+	5100 3800 5100 2650
+Wire Notes Line
+	5100 2650 5050 2650
+Wire Notes Line
+	800  3850 5150 3850
+Wire Notes Line
+	5150 3850 5150 2700
+Wire Notes Line
+	5150 2700 5100 2700
+Wire Notes Line
+	750  3800 5100 3800
+Wire Notes Line
+	750  3800 750  3750
+Wire Notes Line
+	800  3850 800  3800
+Text Notes 650  2500 0    50   ~ 0
+4x Channel
+Wire Bus Line
+	8900 3000 11100 3000
+Wire Bus Line
+	8900 3000 8900 3150
+Text Label 11100 3000 2    50   ~ 0
+Ethernet
+Wire Bus Line
+	6200 3500 6050 3500
+Wire Bus Line
+	6050 3500 6050 3150
+Wire Bus Line
+	6050 3150 5050 3150
+Wire Bus Line
+	6200 4000 6000 4000
+Wire Bus Line
+	6000 4000 6000 3200
+Wire Bus Line
+	6000 3200 5100 3200
+Wire Bus Line
+	6200 4400 5950 4400
+Wire Bus Line
+	5950 4400 5950 3250
+Wire Bus Line
+	5950 3250 5150 3250
+Text Notes 3550 850  0    50   ~ 0
+NOTE: Channels on ADC and offset sample and hold outputs may be different, I didn't check these on Hardware
+Wire Bus Line
+	8850 3150 8850 2650
+Wire Bus Line
+	8850 2650 11000 2650
+Text Label 11000 2650 2    50   ~ 0
+LogicAnalyzer
+Text Notes 11050 2700 0    50   ~ 0
+???
+Wire Bus Line
+	5400 2150 3850 2150
+Wire Bus Line
+	5400 2050 3800 2050
+Wire Bus Line
+	5400 1950 3750 1950
+Wire Bus Line
+	5400 1850 3700 1850
+Wire Bus Line
+	3700 1850 3700 2900
+Wire Bus Line
+	3750 1950 3750 2550
+Wire Bus Line
+	3800 2050 3800 2550
+Wire Bus Line
+	3850 2150 3850 2550
+$EndSCHEMATC

@@ -1,0 +1,460 @@
+Bank Usage and Voltages:
+
+Guessed by looking at the attached peripherals
+
+Bank        Voltage     Usage
+13                      ADCs
+33                      PL-DDR3
+34                      PL-DDR3
+35          3.3V?       Display, Ethernet, Frontpanel
+
+##############################################################################################################################
+
+Display:
+
+Pin         Zynq            Meaning             Bank
+8           Pulled Low      MODE 0=SYNC, 1=DE
+9           Pulled Low      DE
+10          A21             VS                  35
+11          A22             HS                  35
+12          B21             B7                  35
+13          B22             B6                  35
+14          C20             B5                  35
+15          C22             B4                  35
+16          D21             B3                  35
+17          D22             B2                  35
+18          GND             B1
+19          GND             B0
+20          E16             G7                  35
+21          E18             G6                  35
+22          E19             G5                  35
+23          E20             G4                  35
+24          E21             G3                  35
+25          F16             G2                  35
+26          GND             G1
+27          GND             G0
+28          F17             R7                  35
+29          F18             R6                  35
+30          F19             R5                  35
+31          F21             R4                  35
+32          F22             R3                  35
+33          G22             R2                  35
+34          GND             R1
+35          GND             R0
+37          D20             DCLK                35
+39          High            L/R
+40          Low             U/D
+44          Unknown         RESET
+47          High
+
+Display backlight:
+MIO27
+
+
+##############################################################################################################################
+
+Ethernet:
+
+Pin         Zynq            Meaning             Bank
+2           B19             TC_CLK              35
+3           A18             TX_EN               35
+4           C18             TXD_0               35
+5           A19             TXD_1               35
+6           C19             TXD_2               35
+7           B20             TXD_3               35
+24          E15             MDIO                35
+25          D15             MDC                 35
+31          C17             RX_CLK              35
+32          A16             RX_DV               35
+33          B15             CRS                 35
+34          C15             RX_ER               35
+35          B16             COL                 35
+36          D16             RXD_0               35
+37          A17             RXD_1               35
+38          B17             RXD_2               35
+39          D17             RXD_3               35
+
+Ethernet reference clock:
+
+FIXME: GUESSED, but it's in the right ballpark location wise
+D18, Bank 35
+
+PHY reset:
+(unused)
+
+R6, Bank 13
+
+##############################################################################################################################
+
+LEDs:
+
+LED HL2 on Zynq Pin G16, Bank 35
+LED HL1 on Zynq Pin MIO23
+
+##############################################################################################################################
+
+USB:
+#FIMXE: find out which PHY is device and which is host
+
+Reset for right (U28) USB PHY (unconnected): MIO52
+Reset for left (U29) USB PHY: MIO53
+
+##############################################################################################################################
+
+Power on/off:
+MIO18 seems to be a short-pulsed signal from the PMIC to the Zynq when the power button was pressed for a longer time to
+initiate shutdown sequence. Scope is then turned off by sending an I2C command to the MSP430 (see below)
+
+##############################################################################################################################
+
+MSP430 Power management thing:
+I2C address: 116 (0x74)
+
+Current setting of power on after AC connection:
+    i2ctransfer 0 r1@116
+
+Set to power on after AC connected:
+    i2ctransfer 0 w1@116 3
+
+Set to standby after AC connected:
+    i2ctransfer 0 w1@116 2
+
+Turn off scope:
+    i2ctransfer 0 w1@116 1
+
+
+##############################################################################################################################
+
+Beeper:
+W17, Bank 33
+
+##############################################################################################################################
+
+Misc:
+FIXME: Verify connections to MIO19 to different pins. Probing might lead to side-effects
+
+SN74LVC1G3157 analog switch is connected to MIO19 and also to the LVDS180 pin 3 (~RE - receiver enable) and 4 (DE - driver enable)
+Sits above the DAC multiplexing thing, unknown what it does
+
+
+##############################################################################################################################
+
+Frontpanel:
+
+Pin         Connection          Purpose                                         Bank
+1           PMIC PIC            Power LED
+2           GND                 GND
+3           PMIC PIC & MIO??    Power Button - short to GND to push
+4           N22 (levelshifted)  Frontpanel LED RCLK                             34
+5           R20 (levelshifted)  Frontpanel LED CLK                              34
+6           P22 (levelshifted)  Frontpanel LED SERDATA                          34
+7           3V3                 Power to front panel
+8           3V3                 Power to front panel
+9           3V3                 Power to front panel
+10          3V3                 Power to front panel
+11          Zynq H18            Frontpanel button readout counter clock         35
+12          Zynq G19            Frontpanel button readout counter clear         35
+13          GND
+14          GND
+15          Zynq G17            Button matrix output                            35
+16          R21 (levelshifted)  Frontpanel LED shift registers output enable    34
+
+##############################################################################################################################
+
+DDR chip 1 (U31):
+
+Pin         Name                Connection      Byte group      Bank
+A2          DQU5                AB20            1               33
+A3          DQU7                AA19            1               33
+A7          DQU4                AB19            1               33
+B7          ~DQSU               Y21             1               33
+B8          DQU6                Y19             1               33
+C2          DQU3                AB21            1               33
+C3          DQU1                AB22            1               33
+C7          DQSU                Y20             1               33
+C8          DQU2                AA21            1               33
+D3          DMU                 GND                                         Directly connected to GND
+D7          DQU0                AA22            1               33
+E3          DQL0                T21             0               33
+E7          DML                 GND                                         Directly connected to GND
+F2          DQL2                T22             0               33
+F3          DQSL                V22             0               33
+F7          DQL1                U21             0               33
+F8          DQL3                U22             0               33
+G2          DQL6                U20             0               33
+G3          ~DQSL               W22             0               33
+H3          DQL4                W20             0               33
+H7          DQL7                V20             0               33
+H8          DQL5                W21             0               33
+J3          ~RAS                L21             1               34
+J7          CK                  T16             3               34
+K1          ODT                 M22             2               34
+K3          ~CAS                L22             1               34
+K7          ~CK                 T17             3               34
+K9          CKE                 M21             2               34
+L2          ~CS                 Seems to be pulled low by 1K resistor
+L3          ~WE                 K19             1               34
+L7          A10/AP              P17             3               34
+M2          BA0                 K21             1               34
+M3          BA2                 J22             1               34
+N2          A3                  R16             3               34
+N3          A0                  J21             1               34
+N7          A12/~BC             N15             3               34
+N8          BA1                 J20             1               34
+P2          A5                  T18             3               34
+P3          A2                  J18             1               34
+P7          A1                  K18             1               34
+P8          A4                  P16             3               34
+R2          A7                  T19             3               34
+R3          A9                  P18             3               34
+R7          A11                 P15             3               34
+R8          A6                  R18             3               34
+T2          ~RESET              V18             0               33
+T8          A8                  R19             3               34
+
+
+DDR chip 2 (U32):
+
+Pin         Name                Connection      Byte group      Bank
+A2          DQU5                Y13             3               33
+A3          DQU7                AB14            3               33
+A7          DQU4                AA14            3               33
+B7          ~DQSU               Y15             3               33
+B8          DQU6                AA13            3               33
+C2          DQU3                Y14             3               33
+C3          DQU1                V13             3               33
+C7          DQSU                W15             3               33
+C8          DQU2                W13             3               33
+D3          DMU                 GND                                         Directly connected to GND
+D7          DQU0                V14             3               33
+E3          DQL0                W16             2               33
+E7          DML                 GND                                         Directly connected to GND
+F2          DQL2                U17             2               33
+F3          DQSL                U15             2               33
+F7          DQL1                Y16             2               33
+F8          DQL3                V17             2               33
+G2          DQL6                AA16            2               33
+G3          ~DQSL               U16             2               33
+H3          DQL4                AA17            2               33
+H7          DQL7                AB16            2               33
+H8          DQL5                AB17            2               33
+
+... follwing pinout as chip 1
+J3          ~RAS                L21
+J7          CK                  T16
+K1          ODT                 M22
+K3          ~CAS                L22
+K7          ~CK                 T17
+K9          CKE                 M21
+L2          ~CS                 Seems to be pulled low by 1K resistor
+L3          ~WE                 K19
+L7          A10/AP              P17
+M2          BA0                 K21
+M3          BA2                 J22
+N2          A3                  R16
+N3          A0                  J21
+N7          A12/~BC             N15
+N8          BA1                 J20
+P2          A5                  T18
+P3          A2                  J18
+P7          A1                  K18
+P8          A4                  P16
+R2          A7                  T19
+R3          A9                  P18
+R7          A11                 P15
+R8          A6                  R18
+T2          ~RESET              V18
+T8          A8                  R19
+
+
+VREF input for MIG:
+Suspected to be on V15/V19, Bank 33
+
+##############################################################################################################################
+
+NOTE: The polarity might be inverted on some pins. Only way to find this out is read samples and see what comes out
+LVDS-Lines seem to be externally terminated
+
+Right AD Converter for Channel 1 & 2 (U10):
+
+Pin         Name                Connection          Bank
+2           CSN                 
+3           SDATA               
+4           SCLK                
+5           NRESET              
+6           PD                  
+9           DP1A                AA12                13
+10          DN1A                AB12                13
+11          DP1B                AA11                13
+12          DN1B                AB11                13
+13          DP2A                W11                 13
+14          DN2A                W10                 13
+15          DP2B                U10                 13
+16          DN2B                U9                  13
+17          LCLKP               Y9                  13
+18          LCLKN               Y8                  13
+19          FCLKP               AA9                 13
+20          FCLKN               AA8                 13
+21          DP3A                V10                 13
+22          DN3A                V9                  13
+23          DP3B                V8                  13
+24          DN3B                W8                  13
+25          DP4A                Y11                 13
+26          DN4A                Y10                 13
+27          DP4B                AB10                13
+28          DN4B                AB9                 13
+
+Right AD Converter for Channel 3 & 4 (U11):
+
+Pin         Name                Connection          Bank
+2           CSN                 
+3           SDATA               
+4           SCLK                
+5           NRESET              
+6           PD                  
+9           DP1A                AB7                 13
+10          DN1A                AB6                 13
+11          DP1B                AB5                 13
+12          DN1B                AB4                 13
+13          DP2A                V7                  13
+14          DN2A                W7                  13
+15          DP2B                U6                  13
+16          DN2B                U5                  13
+17          LCLKP               Y6                  13
+18          LCLKN               Y5                  13
+19          FCLKP               AA7                 13
+20          FCLKN               AA6                 13
+21          DP3A                W6                  13
+22          DN3A                W5                  13
+23          DP3B                V5                  13
+24          DN3B                V4                  13
+25          DP4A                Y4                  13
+26          DN4A                AA4                 13
+27          DP4B                AB2                 13
+28          DN4B                AB1                 13
+
+##############################################################################################################################
+
+Level shifters
+
+U68: 16 channels
+
+Channel     Purpose                         Zynq    Bank    Checked
+1           Enable of DAC Multiplexer       U19     33      X
+2           DAC Multiplexer S0              U14     33      X
+3           DAC Multiplexer S1              Y18     33      X
+4           DAC Multiplexer S2              AA18    33      X
+5           Pin 4 Frontpanel Connector      N22     34      X
+6           Pin 6 Frontpanel Connector      P22     34      X
+7           Pin 5 Frontpanel Connector      R20     34      X
+8           Pin 16 Frontpanel Connector     R21     34      X
+9           unknown                         W18     33                  seems to go to circuitry under the display connector - input 0 during normal scope operation, as they are inputs and never really change, they are unused most likely
+10          unknown                         M16     34                  seems to go to circuitry under the display connector - input 1 during normal scope operation, as they are inputs and never really change, they are unused most likely
+11          N/C - input grounded                            X
+12          N/C - input grounded                            X
+13          N/C - input grounded                            X
+14          N/C - input grounded                            X
+15          N/C - input grounded                            X
+16          N/C - input grounded                            X
+
+
+U67: 16 channels
+
+Channel     Purpose                         Zynq    Bank    Checked
+1           SPI Clock                       K15     34      X
+2           SPI Data                        J16     34      X
+3           PLL Latch Enable                J17     34
+4           ADC Channel 1&2 CSN             L16     34
+5           ADC Channel 3&4 CSN             L17     34
+6           Frontend shift regs RCLK        M17     34
+7           VGA Channel 1 Latch             N17     34      
+8           VGA Channel 2 Latch             N18     34      
+9           VGA Channel 3 Latch             M15     33      
+10          VGA Channel 4 Latch             K20     34      
+11          Offset DAC SCLK                 H15     34
+12          Offset DAC DIN                  R15     34
+13          Offset DAC ~SYNC                J15     34
+14          N/C - input grounded                            X
+15          N/C - input grounded                            X
+16          N/C - input grounded                            X
+
+U20: 8 channels
+Weird stuff, seems to distribute SPI data & clocks - didn't bother once I found this out
+
+Channel     Purpose                         Zynq    Bank
+1           SCLK Shiftreg Channel 3
+2           SCLK Shiftreg Channel 4
+3           
+4           SCLK ADC1, ADC2
+5           
+6           
+7           
+8 (2Y4)     ADC Channel 1&2 and 3&4 SDI
+
+##############################################################################################################################
+
+HDMI connector for digital probes:
+
+MIO26 goes to FSUSB30 Switch next to HDMI connector
+MIO21 goes to FSUSB30 OE next to HDMI connector
+
+FIXME: Is there a clock being switched using the FSUSB30? If so, where does it come from, which pins does it use?
+
+Pin on a cable      Purpose     Zynq
+1                   Some 25MHz clock appears if scope is running, seems differential with Pin 3
+2                   
+3                   Some 25MHz clock appears if scope is running, seems differential with Pin 1
+4                               N19 (L14P)
+5                               
+6                   GND
+7                               N20 (L14N)
+8                   
+9                   GND
+10                  
+11                  ~5V - maybe supply?
+12                  GND
+13                  ~5V - maybe supply?
+14                  ~5V - maybe supply?
+15                              H20 (L19N)
+16                              H19 (L19P)
+17                              G15
+18                              G20
+19                              H17 (Single ended)
+
+##############################################################################################################################
+
+Missing PL I/Os:
+
+Pin   Pin Name                 Memory Byte Group  Bank  VCCAUX Group  Super Logic Region  I/O Type  No-Connect
+R7    IO_0_13                  NA                 13    NA            NA                  HR        7Z010
+V12   IO_L4P_T0_13             0                  13    NA            NA                  HR        7Z010
+W12   IO_L4N_T0_13             0                  13    NA            NA                  HR        7Z010
+U12   IO_L5P_T0_13             0                  13    NA            NA                  HR        7Z010
+U11   IO_L5N_T0_13             0                  13    NA            NA                  HR        7Z010
+R6    IO_L19P_T3_13            3                  13    NA            NA                  HR        7Z010
+T6    IO_L19N_T3_VREF_13       3                  13    NA            NA                  HR        7Z010
+T4    IO_L20P_T3_13            3                  13    NA            NA                  HR        7Z010
+U4    IO_L20N_T3_13            3                  13    NA            NA                  HR        7Z010
+U7    IO_25_13                 NA                 13    NA            NA                  HR        7Z010
+
+#### SUSPECTED TO BE VREF FOR DDR3     V19   IO_L6N_T0_VREF_33        0                  33    NA            NA                  HR        7Z010
+#### SUSPECTED TO BE VREF FOR DDR3     V15   IO_L19N_T3_VREF_33       3                  33    NA            NA                  HR        7Z010
+AB15  IO_L24N_T3_33            3                  33    NA            NA                  HR        7Z010
+
+K16   IO_L3P_T0_DQS_PUDC_B_34  0                  34    NA            NA                  HR        NA
+L18   IO_L12P_T1_MRCC_34       1                  34    NA            NA                  HR        NA
+L19   IO_L12N_T1_MRCC_34       1                  34    NA            NA                  HR        NA
+M19   IO_L13P_T2_MRCC_34       2                  34    NA            NA                  HR        NA
+M20   IO_L13N_T2_MRCC_34       2                  34    NA            NA                  HR        NA
+N19   IO_L14P_T2_SRCC_34       2                  34    NA            NA                  HR        NA
+N20   IO_L14N_T2_SRCC_34       2                  34    NA            NA                  HR        NA
+P20   IO_L18P_T2_34            2                  34    NA            NA                  HR        NA
+P21   IO_L18N_T2_34            2                  34    NA            NA                  HR        NA
+H17   IO_0_35                  NA                 35    NA            NA                  HR        NA
+G15   IO_L4P_T0_35             0                  35    NA            NA                  HR        NA
+D18   IO_L12P_T1_MRCC_35       1                  35    NA            NA                  HR        NA
+H19   IO_L19P_T3_35            3                  35    NA            NA                  HR        NA
+H20   IO_L19N_T3_VREF_35       3                  35    NA            NA                  HR        NA
+G20   IO_L22P_T3_AD7P_35       3                  35    NA            NA                  HR        NA
+G21   IO_L22N_T3_AD7N_35       3                  35    NA            NA                  HR        NA
+H22   IO_L24P_T3_AD15P_35      3                  35    NA            NA                  HR        NA
