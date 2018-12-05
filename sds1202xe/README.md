@@ -65,3 +65,13 @@ On shutdown:
     sync
     #let the PMIC see the pushed button to turn off
     echo 0 > /sys/class/gpio/gpio924/value
+
+### AFE (analog front-end) setting
+Each channel of the scope contain one 74HC595 shift out register powered by 5V.
+Five of the eight outputs are used to change hardware settings in the AFE:
+
+    595_QB:  First divider, 10:1, active high
+    595_QC:  Second divider, 10:1, active high
+    595_QD:  AC coupling, low = AC, high = DC
+    595_QE:  PGA enable, active high
+    595_QF:  BW limit, low = 20MHz, high = full
